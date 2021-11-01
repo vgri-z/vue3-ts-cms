@@ -8,15 +8,21 @@ const vgriRequest = new VgriRequest({
   timeout: TIME_OUT,
   interceptors: {
     requestInterceptor: (config) => {
-      console.log('请求拦截成功')
+      // 携带token的拦截
+      const token = ''
+      if (token && config.headers) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
+
+      // console.log('请求拦截成功')
       return config
     },
     requestInterceptorCatch: (err) => {
-      console.log('请求拦截失败')
+      // console.log('请求拦截失败')
       console.log(err)
     },
     responseInterceptor: (config) => {
-      console.log('响应拦截成功')
+      // console.log('响应拦截成功')
       return config
     }
     // responseInterceptorCatch: (err) => {

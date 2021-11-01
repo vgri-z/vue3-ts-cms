@@ -33,22 +33,46 @@ app.mount('#app')
 // 网络请求
 // vgriRequest.get()
 // vgriRequest.request()
-vgriRequest.request({
-  url: '/home/multidata',
-  method: 'GET',
-  interceptors: {
-    requestInterceptor(config) {
-      console.log('某个请求独有的请求拦截')
-      return config
-    },
-    responseInterceptor(res) {
-      console.log('某个请求独有的响应拦截')
-      return res
-    }
-  }
-})
-
 // vgriRequest.request({
 //   url: '/home/multidata',
-//   method: 'GET'
+//   method: 'GET',
+//   interceptors: {
+//     requestInterceptor(config) {
+//       console.log('某个请求独有的请求拦截')
+//       return config
+//     },
+//     responseInterceptor(res) {
+//       console.log('某个请求独有的响应拦截')
+//       return res
+//     }
+//   }
 // })
+
+interface DataType {
+  data: any
+  returnCode: string
+  success: boolean
+}
+
+// vgriRequest
+//   .request<DataType>({
+//     url: '/home/multidata',
+//     method: 'GET',
+//     showLoading: false
+//   })
+//   .then((res) => {
+//     console.log(res.data)
+//     console.log(res.returnCode)
+//     console.log(res.success)
+//   })
+
+vgriRequest
+  .get<DataType>({
+    url: '/home/multidata',
+    showLoading: false
+  })
+  .then((res) => {
+    console.log(res.data)
+    console.log(res.returnCode)
+    console.log(res.success)
+  })
